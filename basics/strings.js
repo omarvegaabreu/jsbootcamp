@@ -1,6 +1,5 @@
-let firstName = "omar";
-let lastName = "vega";
+const city = "Miami";
+const country = "United States";
+const location = city + " " + country;
 
-let fullName = firstName + " " + lastName;
-
-console.log(fullName);
+console.log(location);
