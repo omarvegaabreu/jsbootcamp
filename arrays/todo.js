@@ -1,33 +1,57 @@
 const todos = [
-  "Order cat food",
-  "Clean Kitchen",
-  "Buy food",
-  "Do work",
-  "Excercise"
+  {
+    text: "Order cat food",
+    completed: false
+  },
+  {
+    text: "Clean Kitchen",
+    completed: false
+  },
+  {
+    text: "Buy food",
+    completed: true
+  },
+  {
+    text: "Do work",
+    completed: true
+  },
+  {
+    text: "Excercise",
+    completed: false
+  }
 ];
 
-//delete the 3rd item from array
-todos.splice(2, 1);
-//add a new item to the end of the array
-todos.push("new item");
-//remove the first item from the array.
-todos.shift();
+const deleteTodo = (todos, todoText) => {
+  const index = todos.findIndex(todo => {
+    return todo.text.toLowerCase() === todoText.toLowerCase();
+  });
+  if (index > -1) {
+    todos.splice(index, 1);
+  }
+};
 
-//do a foreach loop to show items in the array
+deleteTodo(todos, "Order cat food");
 
-todos.forEach(function(item, index) {
-  const num = index + 1;
+const getThingsToDo = todos => {
+  return todos.filter(todo => {
+    return !todo.completed;
+  });
+};
 
-  console.log(`${num}. ${item}`);
-});
+const sortTodos = todos => {
+  todos.sort((a, b) => {
+    if (!a.completed && b.completed) {
+      return -1;
+    } else if (!b.completed && a.completed) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+};
 
-console.log(`////////for loop////////`);
-//for loop through array
-for (let i = 0; i < todos.length; i++) {
-  const num = i + 1;
-
-  console.log(`${num}. ${todos[i]}`);
-}
-
-console.log(`Pending todo: ${todos}!`);
+sortTodos(todos);
 console.log(todos);
+
+// console.log(todos);
+// console.log(getThingsToDo(todos));
