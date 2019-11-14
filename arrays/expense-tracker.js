@@ -1,29 +1,43 @@
 const account = {
   name: "Omar Vega",
   expenses: [],
-  addExpense: (description, amount) => {
+  income: [],
+  addExpense: function(description, amount) {
     this.expenses.push({
       description: description,
       amount: amount
     });
   },
-  getAccountSummary: () => {
+  addIncome: function(description, amount) {
+    this.income.push({
+      description: description,
+      amount: amount
+    });
+  },
+  getAccountSummary: function() {
     let totalExpenses = 0;
+    let totalIncome = 0;
+    let accountBalance = 0;
 
     this.expenses.forEach(expense => {
-      totalExpenses = expense + expense.amount;
+      totalExpenses = totalExpenses + expense.amount;
     });
 
-    return `${this.name} and ${this.amount}`;
+    this.income.forEach(income => {
+      totalIncome = totalIncome + income.amount;
+    });
+
+    accountBalance = totalIncome - totalExpenses;
+
+    return `${this.name} has a balance of ${accountBalance}. $${totalIncome} in income.  $${totalExpenses} in expenses`;
   }
 };
 
-//expenses -> description, amount
-//addExpenses -> descrition, amount
-//getAccount summary -> total of expenses ex. omar vega has $.00 in expenses
+//1.add income array to account
+//2.addIncome method -> description, amount
+//3. tweak getAccount summary to take expenses and income
 
 account.addExpense("Rent", 950);
-account.addExpense("Coffee", 250);
-
-// console.log(account.expenses);
+account.addExpense("Coffee", 2);
+account.addIncome("job", 1000);
 console.log(account.getAccountSummary());
