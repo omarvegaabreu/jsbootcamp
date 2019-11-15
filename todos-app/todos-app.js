@@ -1,7 +1,22 @@
-const paragraphs = document.querySelectorAll("p");
-
-paragraphs.forEach(function(paragraph) {
-  if (paragraph.textContent.includes("the")) {
-    paragraph.remove();
+const todos = [
+  {
+    text: "Order cat food",
+    completed: false
+  },
+  {
+    text: "Clean Kitchen",
+    completed: false
+  },
+  {
+    text: "Buy food",
+    completed: true
+  },
+  {
+    text: "Do work",
+    completed: true
+  },
+  {
+    text: "Excercise",
+    completed: false
   }
-});
+];
