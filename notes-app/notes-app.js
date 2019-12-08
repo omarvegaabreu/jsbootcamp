@@ -1,21 +1,14 @@
-const notes = [
-  {
-    title: "My next trip",
-    body: "I would like to go to spain"
-  },
-  {
-    title: "habbits to work on",
-    body: "Excersice, and eat better"
-  },
-  {
-    title: "Office modification",
-    body: "A really need a new chair :P"
-  }
-];
+let notes = [];
 
 const filters = {
   searchText: ""
 };
+
+const notesJSON = localStorage.getItem("notes");
+
+if (notesJSON !== null) {
+  notes = JSON.parse(notesJSON);
+}
 
 const renderedNotes = function(notes, filters) {
   const filteredNotes = notes.filter(function(note) {
@@ -26,7 +19,13 @@ const renderedNotes = function(notes, filters) {
 
   filteredNotes.forEach(function(note) {
     const noteEl = document.createElement("p");
-    noteEl.textContent = note.title;
+
+    if (note.title.length > 0) {
+      noteEl.textContent = note.title;
+    } else {
+      noteEl.textContent = "Unnamed note";
+    }
+
     document.querySelector("#notes").appendChild(noteEl);
   });
 };
@@ -34,7 +33,12 @@ const renderedNotes = function(notes, filters) {
 renderedNotes(notes, filters);
 
 document.querySelector("#create-note").addEventListener("click", function(e) {
-  e.target.textContent = "I was clicked";
+  notes.push({
+    title: "",
+    body: ""
+  });
+  localStorage.setItem("notes", JSON.stringify(notes));
+  renderedNotes(notes, filters);
 });
 
 document.querySelector("#search").addEventListener("input", function(e) {
@@ -42,10 +46,6 @@ document.querySelector("#search").addEventListener("input", function(e) {
   renderedNotes(notes, filters);
 });
 
-document.querySelector("#for-fun").addEventListener("change", function(e) {
-  if (e.target.checked === true) {
-    const farted = document.createElement("h1");
-    farted.textContent = "YOUR NAME IS GRAZZY TWIG SILLY";
-    document.querySelector("#notes").appendChild(farted);
-  }
+document.querySelector("#filter-by").addEventListener("change", function(e) {
+  console.log(e.target.value);
 });

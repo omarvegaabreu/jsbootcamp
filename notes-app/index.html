@@ -6,11 +6,13 @@
     <h1>notes app</h1>
     <h2>take notes and never forget</h2>
     <input id="search" type="text" placeholder="filter notes" />
+    <select id="filter-by">
+      <option value="byEdited">Sort by last edited</option>
+      <option value="byCreated">Sort by recently created</option>
+      <option value="alphabetically">Sort by alphabetically</option>
+    </select>
     <div id="notes"></div>
     <button id="create-note">Create Note</button>
-    <label>
-      Check me if you name is obsidian<input id="for-fun" type="checkbox" />
-    </label>
     <script src="./notes-app.js"></script>
   </body>
 </html>
