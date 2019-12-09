@@ -1,30 +1,15 @@
-const todos = [
-  {
-    text: "Order cat food",
-    completed: false
-  },
-  {
-    text: "Clean Kitchen",
-    completed: false
-  },
-  {
-    text: "Buy food",
-    completed: true
-  },
-  {
-    text: "Do work",
-    completed: true
-  },
-  {
-    text: "Excercise",
-    completed: false
-  }
-];
+let todos = [];
 
 const filters = {
   searchText: "",
   hideCompleted: false
 };
+
+const todosJSON = localStorage.getItem("todos");
+
+if (todosJSON !== null) {
+  todos = JSON.parse(todosJSON);
+}
 
 const renderedTodos = function(todos, filters) {
   const filteredTodos = todos.filter(function(todo) {
@@ -67,6 +52,7 @@ document.querySelector("#todo-text").addEventListener("submit", function(e) {
     text: e.target.elements.search.value,
     completed: false
   });
+  localStorage.setItem("todos", JSON.stringify(todos));
 
   renderedTodos(todos, filters);
 
