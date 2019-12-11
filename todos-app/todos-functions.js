@@ -24,6 +24,8 @@ const renderTodos = function(todos, filters) {
       .includes(filters.searchText.toLowerCase());
     const hideCompletedMatch = !filters.hideCompleted || !todo.completed;
 
+    debugger;
+
     return searchTextMatch && hideCompletedMatch;
   });
 
