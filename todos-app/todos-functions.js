@@ -24,8 +24,6 @@ const renderTodos = function(todos, filters) {
       .includes(filters.searchText.toLowerCase());
     const hideCompletedMatch = !filters.hideCompleted || !todo.completed;
 
-    debugger;
-
     return searchTextMatch && hideCompletedMatch;
   });
 
@@ -44,9 +42,22 @@ const renderTodos = function(todos, filters) {
 
 //generate todo to the dom
 const generateTodoDom = function(todos) {
-  const p = document.createElement("p");
+  const div = document.createElement("div");
+  const checkbox = document.createElement("input");
+  const p = document.createElement("span");
+  const button = document.createElement("button");
+
+  //checkbox
+  checkbox.setAttribute("type", "checkbox");
+  div.appendChild(checkbox);
+  //todo text
   p.textContent = todos.text;
-  return p;
+  div.appendChild(p);
+  //delete button
+  button.textContent = "Delete";
+  div.appendChild(button);
+
+  return div;
 };
 
 //get summary
