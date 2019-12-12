@@ -9,8 +9,20 @@ const getSavedNotes = function() {
   }
 };
 
+//remove notes from the list
+const removeNotes = function(id) {
+  // @ts-ignore
+  const noteIndex = notes.findIndex(function(note) {
+    return note.id === id;
+  });
+  if (noteIndex > -1) {
+    // @ts-ignore
+    notes.splice(noteIndex, 1);
+  }
+};
+
 //save notes to local storage
-const saveLocalSorage = function(notes) {
+const saveLocalStorage = function(notes) {
   localStorage.setItem("notes", JSON.stringify(notes));
 };
 
@@ -25,15 +37,19 @@ const generateDomNote = function(notes) {
   button.textContent = "Delete";
   noteEL.appendChild(button);
 
+  button.addEventListener("click", function() {
+    removeNotes(notes);
+    getSavedNotes(notes);
+    renderedNotes(notes, filters);
+  });
+
   if (notes.title.length > 0) {
-    textEL.textContent = note.title;
+    textEL.textContent = notes.title;
   } else {
     textEL.textContent = "Unnamed note";
   }
 
   noteEL.appendChild(textEL);
-  debugger;
-
   return noteEL;
 };
 
