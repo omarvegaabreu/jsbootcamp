@@ -1,3 +1,4 @@
+// @ts-nocheck
 !(function(r) {
   if ("object" == typeof exports && "undefined" != typeof module)
     module.exports = r();

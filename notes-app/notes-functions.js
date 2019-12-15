@@ -1,4 +1,4 @@
-//read existing notes from local storage
+// Read existing notes from localStorage
 const getSavedNotes = function() {
   const notesJSON = localStorage.getItem("notes");
 
@@ -9,52 +9,51 @@ const getSavedNotes = function() {
   }
 };
 
-//remove notes from the list
-const removeNotes = function(id) {
-  // @ts-ignore
-  const noteIndex = notes.findIndex(function(note) {
-    return note.id === id;
-  });
-  if (noteIndex > -1) {
-    // @ts-ignore
-    notes.splice(noteIndex, 1);
-  }
-};
-
-//save notes to local storage
-const saveLocalStorage = function(notes) {
+// Save the notes to localStorage
+const saveNotes = function(notes) {
   localStorage.setItem("notes", JSON.stringify(notes));
 };
 
-//generate note in dom
-const generateDomNote = function(notes) {
-  //generate structure for a note
-  const noteEL = document.createElement("div");
-  const textEL = document.createElement("span");
-  const button = document.createElement("button");
-
-  //set up the remove note button
-  button.textContent = "Delete";
-  noteEL.appendChild(button);
-
-  button.addEventListener("click", function() {
-    removeNotes(notes);
-    getSavedNotes(notes);
-    renderedNotes(notes, filters);
+//remove notes
+const removeNote = function(id) {
+  const noteIndex = notes.findIndex(function(note) {
+    if (note.id === id) {
+      return id;
+    }
   });
-
-  if (notes.title.length > 0) {
-    textEL.textContent = notes.title;
-  } else {
-    textEL.textContent = "Unnamed note";
+  if (noteIndex > -1) {
+    return notes.splice(noteIndex, 1);
   }
-
-  noteEL.appendChild(textEL);
-  return noteEL;
 };
 
-//render application notes
-const renderedNotes = function(notes, filters) {
+// Generate the DOM structure for a note
+const generateNoteDOM = function(note) {
+  const noteEl = document.createElement("div");
+  const textEl = document.createElement("span");
+  const button = document.createElement("button");
+
+  // Setup the remove note button
+  button.textContent = "x";
+  noteEl.appendChild(button);
+  button.addEventListener("click", function() {
+    removeNote(note.id);
+    saveNotes(notes);
+    renderNotes(notes, filters);
+  });
+
+  // Setup the note title text
+  if (note.title.length > 0) {
+    textEl.textContent = note.title;
+  } else {
+    textEl.textContent = "Unnamed note";
+  }
+  noteEl.appendChild(textEl);
+
+  return noteEl;
+};
+
+// Render application notes
+const renderNotes = function(notes, filters) {
   const filteredNotes = notes.filter(function(note) {
     return note.title.toLowerCase().includes(filters.searchText.toLowerCase());
   });
@@ -62,7 +61,7 @@ const renderedNotes = function(notes, filters) {
   document.querySelector("#notes").innerHTML = "";
 
   filteredNotes.forEach(function(note) {
-    const noteEl = generateDomNote(note);
+    const noteEl = generateNoteDOM(note);
     document.querySelector("#notes").appendChild(noteEl);
   });
 };

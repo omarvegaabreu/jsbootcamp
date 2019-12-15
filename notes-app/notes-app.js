@@ -4,23 +4,27 @@ const filters = {
   searchText: ""
 };
 
-renderedNotes(notes, filters);
+renderNotes(notes, filters);
 
+// @ts-ignore
 document.querySelector("#create-note").addEventListener("click", function(e) {
   notes.push({
+    // @ts-ignore
     id: uuidv4(),
     title: "",
     body: ""
   });
-  saveLocalSorage(notes);
-  renderedNotes(notes, filters);
+  saveNotes(notes);
+  renderNotes(notes, filters);
 });
 
-document.querySelector("#search").addEventListener("input", function(e) {
+document.querySelector("#search-text").addEventListener("input", function(e) {
+  // @ts-ignore
   filters.searchText = e.target.value;
-  renderedNotes(notes, filters);
+  renderNotes(notes, filters);
 });
 
 document.querySelector("#filter-by").addEventListener("change", function(e) {
+  // @ts-ignore
   console.log(e.target.value);
 });
