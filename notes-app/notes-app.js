@@ -8,14 +8,18 @@ renderNotes(notes, filters);
 
 // @ts-ignore
 document.querySelector("#create-note").addEventListener("click", function(e) {
+  const id = uuidv4();
   notes.push({
     // @ts-ignore
-    id: uuidv4(),
+    id: id,
     title: "",
     body: ""
   });
+
   saveNotes(notes);
-  renderNotes(notes, filters);
+  // renderNotes(notes, filters);
+  // location.hash(noteId);
+  location.assign(`./edit.html#${id}`);
 });
 
 document.querySelector("#search-text").addEventListener("input", function(e) {
