@@ -26,5 +26,6 @@ document.querySelector("#new-todo").addEventListener("submit", e => {
 
 document.querySelector("#hide-completed").addEventListener("change", e => {
   filters.hideCompleted = e.target.checked;
+
   renderTodos(todos, filters);
 });

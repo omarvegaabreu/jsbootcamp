@@ -9,7 +9,7 @@ let note = notes.find(note => note.id === noteId);
 
 //check if there is an existing note
 
-if (note === undefined) {
+if (!note) {
   location.assign("./index.html");
 }
 
@@ -53,7 +53,7 @@ window.addEventListener("storage", e => {
 
     //check if there is an existing note
 
-    if (note === undefined) {
+    if (!note) {
       location.assign("./index.html");
     }
 
