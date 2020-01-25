@@ -35,8 +35,9 @@
 // studentGrade(20);
 
 //cleaner way of doing it.
-const gradeCalc = function(score, totalScore = 20) {
+const gradeCalc = (score, totalScore = 20) => {
   const percent = (score / totalScore) * 100;
+  typeof percent;
   let letterGrade = "";
 
   if (percent >= 90) {
@@ -53,6 +54,3 @@ const gradeCalc = function(score, totalScore = 20) {
 
   return `You got a ${letterGrade} (${percent}%!)`;
 };
-
-const result = gradeCalc(-1);
-console.log(result);
