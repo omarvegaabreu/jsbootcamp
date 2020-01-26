@@ -35,9 +35,12 @@
 // studentGrade(20);
 
 //cleaner way of doing it.
+
 const gradeCalc = (score, totalScore = 20) => {
+  if (typeof score !== "number" || typeof totalScore !== "number") {
+    throw Error("Please only use numbers");
+  }
   const percent = (score / totalScore) * 100;
-  typeof percent;
   let letterGrade = "";
 
   if (percent >= 90) {
@@ -54,3 +57,10 @@ const gradeCalc = (score, totalScore = 20) => {
 
   return `You got a ${letterGrade} (${percent}%!)`;
 };
+
+try {
+  const result = gradeCalc(20);
+  console.log(result);
+} catch (e) {
+  console.log(e.message);
+}
