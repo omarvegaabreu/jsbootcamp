@@ -1,4 +1,4 @@
-class personConstructor {
+class Person {
   constructor(firstName, lastName, age, likes = []) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -25,17 +25,35 @@ class personConstructor {
   }
 }
 
-const newPerson = new personConstructor("Omar", "Vega", "38", [
-  "jujitsu",
-  "chess",
-  "MMA"
-]);
-console.log(newPerson);
+class Employee extends Person {
+  constructor(firstName, lastName, age, position, likes) {
+    super(firstName, lastName, age, (likes = []));
+    this.position = position;
+  }
+  getBio() {
+    return `${this.firstName} works as a ${this.position} `;
+  }
+  getRetirement() {
+    return 65 - this.age;
+  }
+}
 
-const me = new Person("Omar", "Vega", 38, ["Jujitsu", "Playing", "family"]);
-me.setName("Alexis Turner");
-console.log(me.getBio());
+class Student extends Person {
+  constructor(firstName, lastName, grades) {
+    super(firstName, lastName);
+    this.grades = grades;
+  }
 
-const meTwo = new Person("Rosely", "De los Santos", 38);
-console.log(meTwo.getBio());
-console.log(meTwo.getAge());
+  updateGrades(updateGrade) {
+    this.grades += updateGrade;
+  }
+  getBio() {
+    const status = this.grades >= 70 ? "Is passing" : "Is failing";
+
+    return `${this.firstName} is ${status} the class. `;
+  }
+}
+const otherStudent = new Student("Omar", "vega", 70);
+console.log(otherStudent.getBio());
+otherStudent.updateGrades(-30);
+console.log(otherStudent.getBio());
