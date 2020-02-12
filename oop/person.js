@@ -17,11 +17,13 @@ class Person {
   getAge() {
     return `this is get age: ${this.age}`;
   }
-
-  setName(fullName) {
+  set fullName(fullName) {
     const names = fullName.split(" ");
     this.firstName = names[0];
     this.lastName = names[1];
+  }
+  get fullName() {
+    return `${this.firstName} ${this.lastName} `;
   }
 }
 
@@ -54,6 +56,6 @@ class Student extends Person {
   }
 }
 const otherStudent = new Student("Omar", "vega", 70);
-console.log(otherStudent.getBio());
-otherStudent.updateGrades(-30);
+const joseStudent = new Person("Omar", "vega", 70);
+otherStudent.fullName = "Jose";
 console.log(otherStudent.getBio());
