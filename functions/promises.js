@@ -8,13 +8,15 @@ getDataCallback((error, data) => {
   error ? console.log("error") : console.log(data);
 });
 
-const promiseData = new Promise((resolved, reject) => {
-  setTimeout(() => {
-    resolved("This is the PROMISE data");
-    reject("This is the PROMISE error");
-  }, 2000);
-});
+const getPromiseData = data =>
+  new Promise((resolved, reject) => {
+    setTimeout(() => {
+      resolved(data);
+      reject("This is the PROMISE error");
+    }, 2000);
+  });
 
+const promiseData = getPromiseData("PROMISE DATA");
 promiseData.then(
   data => {
     console.log(data);
