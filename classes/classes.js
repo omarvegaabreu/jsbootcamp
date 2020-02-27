@@ -15,16 +15,42 @@ class Person {
 }
 
 class Students extends Person {
-  constructor(name, major) {
-    super(name);
+  constructor(name = "Anonymous", lastName, age = 0, major) {
+    super(name, lastName, age);
     this.major = major;
+  }
+
+  getMajor() {
+    return `${this.name}'s Mayor is: ${this.major}`;
+  }
+
+  getDescription() {
+    let description = super.getDescription();
+    return (description += ` his major is ${this.major}`);
   }
 }
 
-const omar = new Person("Omar", "Vega", 37);
+class Traveler extends Person {
+  constructor(name = "Anonymous", lastName, location) {
+    super(name, lastName);
+    this.location = location;
+  }
+  getGreeting() {
+    let greeting = super.getGreeting();
 
-const other = new Students("Alejandro", "Computer Science");
-// console.log(omar.getGrade());
-// console.log(omar);
-console.log(other);
+    if (this.location) {
+      return greeting + ` I am from ${this.location}`;
+    } else {
+      return greeting;
+    }
+  }
+}
+
+// const omar = new Students("Omar", "Vega", 37, "Law");
+const omar = new Traveler("Omar", "Vega", "Miami,FL");
+const other = new Traveler("Alejandro", "Vega");
+console.log(omar.getGreeting());
+console.log(other.getGreeting());
+// console.log(omar.getDescription());
 // console.log(other.getDescription());
+// // console.log(other.getDescription());
